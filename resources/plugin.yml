@@ -3,3 +3,5 @@ main: test.TestPlugin
 version: 1.0
 commands:
   testreload: {}
+  cmdblock:
+    aliases: [commandblock]

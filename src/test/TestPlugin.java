@@ -1,5 +1,6 @@
 package test;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -10,10 +11,16 @@ public class TestPlugin extends JavaPlugin {
     private int var1;
     private String text;
 
+    private BlockCommands blockCommands;
+
     @Override
     public void onEnable() {
         this.saveDefaultConfig();
         this.getCommand("testreload").setExecutor(this);
+
+        blockCommands = new BlockCommands(this);
+        Bukkit.getPluginManager().registerEvents(blockCommands, this);
+        this.getCommand("cmdblock").setExecutor(new CommandCmdBlock(blockCommands));
 
         this.reloadConfigParams();
     }
@@ -27,6 +34,8 @@ public class TestPlugin extends JavaPlugin {
         this.getLogger().info("Достали из конфига новые значения: " +
                 "var1 = " + var1 + ", " +
                 "text = " + text);
+
+        blockCommands.loadConfig();
     }
 
     @Override

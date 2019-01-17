@@ -1,3 +1,5 @@
 # Конфиг по умолчанию
 var1: 123
 text: test
+blocks:
+- 'world:0:100:0:STONE:kick {player}'
